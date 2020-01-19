@@ -29,7 +29,7 @@ namespace Snake
                 pList.Add(p);
             }
         }
-        internal void Move()
+        public void Move()
         {
             // метод First() возвращает первый элемент списка
             Point tail = pList.FirstOrDefault(); // firstordefault
@@ -61,6 +61,17 @@ namespace Snake
             nextPoint.Move(1, direction);
 
             return nextPoint;
+        }
+        public void HandleKey(ConsoleKey key)
+        {
+            if (key == ConsoleKey.UpArrow)
+                direction = Direction.UP;
+            else if (key == ConsoleKey.DownArrow)
+                direction = Direction.DOWN;
+            else if (key == ConsoleKey.LeftArrow)
+                direction = Direction.LEFT;
+            else if (key == ConsoleKey.RightArrow)
+                direction = Direction.RIGHT;
         }
     }
 }

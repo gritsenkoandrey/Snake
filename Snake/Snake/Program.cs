@@ -33,16 +33,16 @@ namespace Snake
             snake.Drow();
             snake.Move();
 
-            Thread.Sleep(300);
-            snake.Move();
-            Thread.Sleep(300);
-            snake.Move();
-            Thread.Sleep(300);
-            snake.Move();
-            Thread.Sleep(300);
-            snake.Move();
-            Thread.Sleep(300);
-            snake.Move();
+            while(true)
+            {
+                if(Console.KeyAvailable) // Возвращает или задает значение, указывающее, доступно ли нажатие клавиши во входном потоке.
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snake.HandleKey(key.Key);
+                }
+                Thread.Sleep(100);
+                snake.Move();
+            }            
 
             Console.ReadKey();
         }
