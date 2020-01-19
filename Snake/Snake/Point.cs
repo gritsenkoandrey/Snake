@@ -63,5 +63,10 @@ namespace Snake
             sym = ' ';
             Draw();
         }
+        // метод определяет есть ли пересечение точки, которую выдали с помощью аргумента с точкой какая на карте
+        public bool IsHit(Point p)
+        {
+            return p.x == this.x && p.y == this.y;
+        }
     }
 }

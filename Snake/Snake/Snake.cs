@@ -73,5 +73,20 @@ namespace Snake
             else if (key == ConsoleKey.RightArrow)
                 direction = Direction.RIGHT;
         }
+        // если змейка догонит еду, то выполнится true, если нет false
+        public bool Eat(Point food)
+        {
+            // определяем где голова у змеи
+            Point head = GetNextPoint();
+
+            if (head.IsHit(food)) // (head.x == food.x && head.y == food.y)
+            {
+                food.sym = head.sym;
+                pList.Add(food);
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

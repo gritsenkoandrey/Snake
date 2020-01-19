@@ -31,20 +31,34 @@ namespace Snake
             // респавн змеи и ее направления
             Snake snake = new Snake(p, 4, Direction.RIGHT);
             snake.Drow();
-            snake.Move();
+
+            // создаем еду в пределах координат 80/25 и символом еды $
+            FoodCreator foodCreator = new FoodCreator(80, 25, '$');
+            // создаем точку с едой в рандмном месте в пределах координат
+            Point food = foodCreator.Createfood();
+            // выводим на поле точку
+            food.Draw();
 
             while(true)
             {
-                if(Console.KeyAvailable) // Возвращает или задает значение, указывающее, доступно ли нажатие клавиши во входном потоке.
+                if(snake.Eat(food))
+                {
+                    food = foodCreator.Createfood();
+                    food.Draw();
+                }
+                else
+                {
+                    snake.Move();
+                }
+
+                Thread.Sleep(100);
+
+                if (Console.KeyAvailable) // Возвращает или задает значение, указывающее, доступно ли нажатие клавиши во входном потоке.
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.HandleKey(key.Key);
                 }
-                Thread.Sleep(100);
-                snake.Move();
             }            
-
-            Console.ReadKey();
         }
     }
 }
