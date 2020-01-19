@@ -8,11 +8,15 @@ namespace Snake
 {
     class Snake : Figure
     {
+        Direction direction;
+
         // tail - начальная точка змеи, ее хвост
         // lenght - длинна змеи
         // direction - направление движения змеи
         public Snake(Point tail, int lenght, Direction direction) // конструктор создания змеи
         {
+            this.direction = direction;
+
             pList = new List<Point>();
 
             for(int i = 0; i < lenght; i++)
@@ -24,6 +28,39 @@ namespace Snake
                 // добавляем точку в лист
                 pList.Add(p);
             }
+        }
+        internal void Move()
+        {
+            // метод First() возвращает первый элемент списка
+            Point tail = pList.FirstOrDefault(); // firstordefault
+
+            // метод Remove() удаляет хвост змеи, ее крайнюю точку, т.к. змея ползет всегда прямо
+            pList.Remove(tail);
+
+            // head должна куда то переместится, для этого нужно написать метод GetNextPoint()
+            Point head = GetNextPoint();
+
+            // создаем новый pList
+            pList.Add(head);
+
+            // с помощью метода Clear() удаляем первый элемент змеи ее хвост
+            tail.Clear();
+
+            // отрисовываем новую точку 
+            head.Draw();
+        }
+        public Point GetNextPoint()
+        {
+            // head змеи равна последней точке в pList
+            Point head = pList.LastOrDefault(); // lastordefault
+
+            // создаем новую точку, которая будет head
+            Point nextPoint = new Point(head);
+
+            // двигаем ее на одну клетку
+            nextPoint.Move(1, direction);
+
+            return nextPoint;
         }
     }
 }

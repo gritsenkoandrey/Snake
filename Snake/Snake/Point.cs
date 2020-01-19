@@ -18,6 +18,10 @@ namespace Snake
             this.y = y;
             this.sym = sym;
         }
+        public Point()
+        {
+
+        }
         //создаем конструктор, который задает параметры для змеи в конструкторе Snake
         public Point(Point p)
         {
@@ -42,7 +46,7 @@ namespace Snake
                 case Direction.DOWN:
                     y -= offset;
                     break;
-            }
+            }            
         }
         public void Draw()
         {
@@ -53,6 +57,11 @@ namespace Snake
         public override string ToString()
         {
             return x + ", " + y + ", " + sym;
+        }
+        public void Clear()
+        {
+            sym = ' ';
+            Draw();
         }
     }
 }
